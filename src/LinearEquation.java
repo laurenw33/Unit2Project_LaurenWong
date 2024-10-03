@@ -1,45 +1,80 @@
 public class LinearEquation {
+        private int x1;
+        private int y1;
+        private int x2;
+        private int y2;
+        private double slope;
+        private String coord1;
+        private String coord2;
 
-    private int x1;
-    private int x2;
-    private int y1;
-    private int y2;
-    private double slope;
-    private double yIntercept;
-    private double distancePoints;
 
-    //public new coordinate(int x1, int y1)
-    {
+        public LinearEquation(String coord1, String coord2) {
+            this.coord1 = coord1;
+            this.coord2 = coord2;
+            String [] splitcoord1 = coord1.split(",");
+            String [] splitcoord2 = coord2.split(",");
+            x1 = Integer.valueOf(splitcoord1[0].substring(1, splitcoord1[0].length()));
+            y1 = Integer.valueOf(splitcoord1[1].substring(0, splitcoord1[1].length() - 1));
+            x2 = Integer.valueOf(splitcoord2[0].substring(1, splitcoord2[0].length()));
+            y2 = Integer.valueOf(splitcoord2[1].substring(0, splitcoord2[1].length() - 1));
+        }
 
+
+        public String getCoord1() {
+            return coord1;
+        }
+
+
+        public String getCoord2() {
+            return coord2;
+        }
+
+
+    public String getSlope() {
+        int deltaY = y2 - y1;
+        int deltaX = x2 - x1;
+
+
+        if (deltaY % deltaX == 0)
+        {
+            return String.valueOf(deltaY / deltaX);
+        }
+
+        else
+        {
+            return deltaY + "/" + deltaX;
+        }
     }
 
-    public int slope (int x1, int y1, int x2, int y2)
-    {
-        this.x1 = x1;
-        this.x2 = x2;
-        this.y1 = y1;
-        this.y2 = y2;
-
-        slope = (y2 - y1)/(x2 - x1);
+        public double getYIntercept() {
+            double slopeValue = (double)(y2 - y1) / (x2 - x1);
+            return y1 - (slopeValue * x1);
+        }
 
 
+        public double getDistance() {
+            double distance = Math.sqrt((x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1));
+            distance = Math.round(distance * 100.0) / 100.0;
+            return distance;
+        }
+
+
+        public double solve(double x) {
+            double slopeValue = (double)(y2 - y1) / (x2 - x1); // Use double for calculation
+            return slopeValue * x + getYIntercept();
+        }
+
+        public String toString()
+        {
+            String first = ("First pair: " + coord1);
+            String second = ("Second pair: " + coord2);
+            String s = ("Slope of line: " + getSlope());
+            String y = ("Y-intercept: " + getYIntercept());
+            String e = ("Slope intercept form: " + "y = " + getSlope() + "x + " + getYIntercept());
+            String d = ("Distance between the points: " + getDistance());
+
+            return first + "\n" + second + "\n" + s + "\n" + y + "\n" + e + "\n" + d;
+        }
     }
-        public int yIntercept (double slope, int x1, int y1)
-    {
-       yIntercept = (y1) - ((slope)(x1));
-    }
 
 
-    public LinearEquation(double slope, double yIntercept)
-    {
-        this.slope = slope;
-        this.yIntercept = yIntercept;
-
-    }
-
-    public String toString()
-    {
-        String equation = ("y =" + slope + "x " + yIntercept);
-        return equation + "\n" + slope;
-    }
-}
