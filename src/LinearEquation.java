@@ -40,6 +40,7 @@ public class LinearEquation {
             return String.valueOf(deltaY / deltaX);
         }
 
+
         else
         {
             return deltaY + "/" + deltaX;
@@ -60,17 +61,16 @@ public class LinearEquation {
 
 
         public double solve(double x) {
-            double slopeValue = (double)(y2 - y1) / (x2 - x1); // Use double for calculation
+            double slopeValue = (double)(y2 - y1) / (x2 - x1);
             return slopeValue * x + getYIntercept();
         }
 
-        public String toString()
-        {
+            public String toString() {
             String first = ("First pair: " + coord1);
             String second = ("Second pair: " + coord2);
             String s = ("Slope of line: " + getSlope());
             String y = ("Y-intercept: " + getYIntercept());
-            String e = ("Slope intercept form: " + "y = " + getSlope() + "x + " + getYIntercept());
+            String e = ("Slope intercept form: y = " + getSlope() + "x + " + getYIntercept());
             String d = ("Distance between the points: " + getDistance());
 
             return first + "\n" + second + "\n" + s + "\n" + y + "\n" + e + "\n" + d;
