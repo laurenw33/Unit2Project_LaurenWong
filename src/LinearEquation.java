@@ -50,8 +50,9 @@ public class LinearEquation {
 
         public double getYIntercept() {
             double slope = (double)(y2 - y1) / (x2 - x1);
-            slope = Math.round(slope * 100.0) / 100.0;
-            return  Math.round(((y1 - (slope * x1)) * 100.0) / 100.0);
+            double x = (double) y1 - (slope * (double) x1);
+            slope = Math.round(x * 100.00) / 100.00;
+            return slope;
         }
 
 
@@ -64,10 +65,12 @@ public class LinearEquation {
 
         public double solve(double x) {
             double slopeValue = (double)(y2 - y1) / (x2 - x1);
-            return Math.round((slopeValue * x + getYIntercept()) * 100.0 / 100.0);
+            slopeValue = slopeValue * x + getYIntercept();
+            slopeValue = Math.round(slopeValue * 100.0 / 100.0);
+            return slopeValue;
         }
 
-            public String toString() {
+        public String toString() {
             String first = ("First pair: " + coord1);
             String second = ("Second pair: " + coord2);
             String s = ("Slope of line: " + getSlope());
